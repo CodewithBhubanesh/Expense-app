@@ -49,8 +49,8 @@ const token = jwt.sign({
 
             response.cookie('jwtToken', token, {
                 httpOnly: true,
-                secure: false,
-                sameSite: 'lax',
+                secure: True,
+                sameSite: 'none',
                 path: '/'
             });
 
