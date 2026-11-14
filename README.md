@@ -1,2 +1,6 @@
-# Expense-app
-This app is called MergeMoney, a group-expense app on the MERN stack with Razorpay payments.
+# MergeMoney (MERN group expense app)
+
+- `expense-react-client/`  Frontend (React + Vite) -> deploy on Vercel (Root Directory = expense-react-client)
+- `Expense-Server/`        Backend (Node + Express + MongoDB) -> deploy on Render/Railway
+
+See CHANGES-AND-SETUP.md for setup, Razorpay and environment variables.
