@@ -7,6 +7,14 @@ const { ADMIN_ROLE } = require('../utility/userRoles');
 
 const getJwtSecret = () => process.env.JWT_SECRET || 'dev-secret';
 
+// Cookie settings that work between Vercel (frontend) and Render (backend)
+const cookieOptions = {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+    path: '/'
+};
+
 const authController = {
 
     // LOGIN
@@ -39,7 +47,7 @@ const authController = {
 
             const jwtSecret = getJwtSecret();
 
-const token = jwt.sign({
+            const token = jwt.sign({
                 name: user.name,
                 email: user.email,
                 _id: user._id,
@@ -47,12 +55,7 @@ const token = jwt.sign({
                 adminId: user.adminId
             }, jwtSecret, { expiresIn: '1h' });
 
-            response.cookie('jwtToken', token, {
-                httpOnly: true,
-                secure: True,
-                sameSite: 'none',
-                path: '/'
-            });
+            response.cookie('jwtToken', token, cookieOptions);
 
             return response.status(200).json({
                 message: 'User authenticated',
@@ -134,12 +137,7 @@ const token = jwt.sign({
     // LOGOUT
     logout: async (request, response) => {
         try {
-            response.clearCookie('jwtToken', {
-                httpOnly: true,
-                sameSite: 'lax',
-                secure: false,
-                path: '/'
-            });
+            response.clearCookie('jwtToken', cookieOptions);
 
             return response.json({
                 message: 'Logout successful'
@@ -198,12 +196,7 @@ const token = jwt.sign({
                 adminId: user.adminId
             }, jwtSecret, { expiresIn: '1h' });
 
-            response.cookie('jwtToken', token, {
-                httpOnly: true,
-                secure: false,
-                sameSite: 'lax',
-                path: '/'
-            });
+            response.cookie('jwtToken', token, cookieOptions);
 
             return response.status(200).json({
                 message: 'User authenticated',
