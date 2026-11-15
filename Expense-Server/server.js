@@ -101,11 +101,12 @@ const allowedOrigins = [
     'http://127.0.0.1:5174',
     'http://127.0.0.1:5175',
     'https://expense-react-client-two.vercel.app',
-    'https://expense-react-client-ivn9vcffc.vercel.app'
+    'https://expense-react-client-ivn9vcffc.vercel.app',
+    'https://mergemoney-app.vercel.app'
 ];
 
 if (process.env.CLIENT_URL) {
-    allowedOrigins.push(process.env.CLIENT_URL.replace(/\/$/, ''));
+    allowedOrigins.push(process.env.CLIENT_URL.trim().replace(/\/$/, ''));
 }
 
 const corsOptions = {
