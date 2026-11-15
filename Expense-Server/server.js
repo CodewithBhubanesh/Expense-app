@@ -111,7 +111,11 @@ if (process.env.CLIENT_URL) {
 
 const corsOptions = {
     origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
+        // Allow this project's Vercel URLs (production, per-deployment and branch URLs)
+        const isMergeMoneyVercel =
+            origin && /^https:\/\/mergemoney-[a-z0-9-]+-monster-busters\.vercel\.app$/.test(origin);
+
+        if (!origin || allowedOrigins.includes(origin) || isMergeMoneyVercel) {
             return callback(null, true);
         }
 
